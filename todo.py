@@ -27,9 +27,10 @@ def parseTodos(infile, outfile, path):
             if not labelWritten:
                 outfile.write(path + "\n")
                 outfile.write("-" * len(path) + "\n")
-                outfile.write("* " + str(lineno) + ": " + match.group(1) + "\n")
-                lineno += 1
-    outfile.write("\n")
+            outfile.write("* " + str(lineno) + ": " + match.group(1) + "\n")
+            lineno += 1
+    if labelWritten:
+        outfile.write("\n")
 
 
 parser = argparse.ArgumentParser(description='Recursively parse a directory tree and compile a report of "TODO" comments.')
