@@ -36,3 +36,7 @@ nosetests.xml
 
 *.*~
 .*.*~
+
+test/
+todo.md
+todo.html

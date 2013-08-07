@@ -20,13 +20,15 @@ def printFooter(outfile, root):
 
 def parseTodos(infile, outfile, path):
     labelWritten = False
+    lineno = 1
     for line in infile:
         match = re.search('TODO:\s*(.*)$', line)
         if match is not None:
             if not labelWritten:
                 outfile.write(path + "\n")
                 outfile.write("-" * len(path) + "\n")
-            outfile.write("* " + match.group(1) + "\n")
+                outfile.write("* " + str(lineno) + ": " + match.group(1) + "\n")
+                lineno += 1
     outfile.write("\n")
 
 
@@ -80,5 +82,6 @@ if html:
         contents = outfile.read()
         html = markdown.markdown(contents)
         outfile.seek(0)
+        outfile.truncate()
         outfile.write(html)
         outfile.close()
