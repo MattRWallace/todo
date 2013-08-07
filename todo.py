@@ -68,9 +68,12 @@ for folder, subs, files in os.walk(root):
         subs[:] = [s for s in subs if not s[0] == '.']
     for filename in files:
         abspath = os.path.abspath(os.path.join(folder, filename))
-        with open(abspath, 'r') as current:
-            parseTodos(current, outfile, abspath)
-            current.close()
+        try:
+            with open(abspath, 'r') as current:
+                parseTodos(current, outfile, abspath)
+                current.close()
+        except:
+            sys.stderr.write("Failed to open " + abspath + "\n")
 
 # cleanup
 printFooter(outfile, root)
